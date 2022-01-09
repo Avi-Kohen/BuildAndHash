@@ -25,8 +25,14 @@ def submitButtonClick():
     scroll = Scrollbar(Eula)
     scroll.pack(side=RIGHT, fill=Y)
 
+    def del_rw(action, name, exc):
+        os.chmod(name, stat.S_IWRITE)
+        os.remove(name)
+
     def declined():
         Eula.destroy()
+        shutil.rmtree(repository_name, onerror=del_rw)
+        os.remove('commit_log.txt')
         exit_label = Label(root,text= "Commit declined you can exit the program",bg = "white")
         exit_label.grid(row=2,column = 0)
 
@@ -36,9 +42,6 @@ def submitButtonClick():
         accept_label.grid(row=2,column = 0)
 
         shutil.make_archive("Build", 'zip', repository_name)
-        def del_rw(action, name, exc):
-            os.chmod(name, stat.S_IWRITE)
-            os.remove(name)
         shutil.rmtree(repository_name, onerror=del_rw)
         os.remove('commit_log.txt')
         
@@ -47,7 +50,7 @@ def submitButtonClick():
             hash_result = hashlib.md5(pass_text.get().encode())
             with open('hash.txt', 'w') as f:
                 f.write(str(hash_result))
-            zipObj = ZipFile('Build_with_Hash.zip', 'w')
+            zipObj = ZipFile('Build_with_Hash.hib', 'w')
             zipObj.write('Build.zip')
             zipObj.write('hash.txt')
             zipObj.close()
