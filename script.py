@@ -56,7 +56,7 @@ def submitButtonClick():
             zipObj.close()
             os.remove("Build.zip")
             os.remove('hash.txt')
-            done_label = Label(root,text="zip file created, Operation ended you can exit the program",bg="white")
+            done_label = Label(root,text="hib file created, Operation ended you can exit the program",bg="white")
             done_label.grid(row=4)
         pass_label = Label(root,text= "Enter hash password",bg = "white")
         pass_label.grid(row=3,column = 0)
