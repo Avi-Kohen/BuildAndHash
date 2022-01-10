@@ -49,8 +49,8 @@ def submitButtonClick():
             pass_button.config(state = "disabled")
             hash_result = hashlib.md5(pass_text.get().encode())
             with open('hash.txt', 'w') as f:
-                f.write(str(hash_result))
-            zipObj = ZipFile('Build_with_Hash.hib', 'w')
+                f.write(str(hash_result.hexdigest()))
+            zipObj = ZipFile(repository_name +'.hib', 'w')
             zipObj.write('Build.zip')
             zipObj.write('hash.txt')
             zipObj.close()
